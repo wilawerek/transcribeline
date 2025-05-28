@@ -1,6 +1,5 @@
 import json
 import logging
-import os
 import tomllib
 from pathlib import Path
 from types import SimpleNamespace
@@ -36,17 +35,25 @@ def load_substitutions(path: str) -> dict:
         return json.load(f)
 
 
-def setup_logger(name: str = "pipeline") -> logging.Logger:
+def setup_logger(module_name: str = "pipeline", log_dir: str = "logs") -> logging.Logger:
     """
-    Configure and return a logger with ASCII-only formatting.
+    Configure and return a logger that logs both to the console and a file.
     """
-    logger = logging.getLogger(name)
+    logger = logging.getLogger(module_name)
     logger.setLevel(logging.DEBUG)
+    logger.handlers.clear()
 
-    ch = logging.StreamHandler()
-    ch.setLevel(logging.DEBUG)
-    formatter = logging.Formatter("[%(asctime)s] [%(levelname)s] %(message)s", "%Y-%m-%d %H:%M:%S")
-    ch.setFormatter(formatter)
-    logger.addHandler(ch)
+    # Console handler
+    console_handler = logging.StreamHandler()
+    console_formatter = logging.Formatter(f"[{module_name}] %(levelname)s: %(message)s")
+    console_handler.setFormatter(console_formatter)
+    logger.addHandler(console_handler)
+
+    # File handler
+    Path(log_dir).mkdir(parents=True, exist_ok=True)
+    file_handler = logging.FileHandler(Path(log_dir) / f"{module_name}.log")
+    file_formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s", "%Y-%m-%d %H:%M:%S")
+    file_handler.setFormatter(file_formatter)
+    logger.addHandler(file_handler)
 
     return logger
