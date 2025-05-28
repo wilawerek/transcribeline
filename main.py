@@ -1,4 +1,7 @@
 import argparse
+
+from config.config import DEFAULT_CONFIG_PATH
+from src.chunker import cli_entry as chunk_cli_entry
 from src.utils import load_config, setup_logger
 
 # Initialize top-level logger
@@ -7,8 +10,7 @@ logger = setup_logger("main")
 
 def run_chunking(args):
     logger.info("Running chunking module...")
-    # Here you'd import and call your actual chunking function from chunker.py
-    pass
+    chunk_cli_entry(args)
 
 
 def run_transcription(args):
@@ -37,11 +39,14 @@ def run_merging(args):
 
 def main():
     parser = argparse.ArgumentParser(description="Transcription Pipeline CLI")
-    parser.add_argument("--config", required=True, help="Path to the TOML config file")
-
+    parser.add_argument("--config", default=DEFAULT_CONFIG_PATH, help="Path to the TOML config file")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    subparsers.add_parser("chunk", help="Run the chunking step").set_defaults(func=run_chunking)
+    chunk_parser = subparsers.add_parser("chunk", help="Run the chunking step")
+    chunk_parser.add_argument("--input", required=True, help="Path to the input .wav file")
+    chunk_parser.add_argument("--output", required=True, help="Directory to save audio chunks")
+    chunk_parser.set_defaults(func=run_chunking)
+
     subparsers.add_parser("transcribe", help="Run the transcription step").set_defaults(func=run_transcription)
     subparsers.add_parser("diarize", help="Run the diarization step").set_defaults(func=run_diarization)
     subparsers.add_parser("postprocess", help="Run the postprocessing step").set_defaults(func=run_postprocessing)

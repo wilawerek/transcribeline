@@ -1,9 +1,10 @@
-import os
 import json
-import tomllib
 import logging
+import os
+import tomllib
 from pathlib import Path
 from types import SimpleNamespace
+
 
 def load_config(config_path: str) -> SimpleNamespace:
     """
@@ -12,6 +13,7 @@ def load_config(config_path: str) -> SimpleNamespace:
     with open(config_path, "rb") as f:
         config_dict = tomllib.load(f)
     return dict_to_namespace(config_dict)
+
 
 def dict_to_namespace(d: dict) -> SimpleNamespace:
     """
@@ -25,12 +27,14 @@ def dict_to_namespace(d: dict) -> SimpleNamespace:
             setattr(ns, key, value)
     return ns
 
+
 def load_substitutions(path: str) -> dict:
     """
     Load substitution rules from a JSON file.
     """
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
+
 
 def setup_logger(name: str = "pipeline") -> logging.Logger:
     """
