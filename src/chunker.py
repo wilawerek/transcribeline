@@ -61,12 +61,13 @@ def chunk_audio(
 
 def cli_entry(args):
     config = load_config(args.config)
-    input_path = Path(args.input)
-    output_path = Path(args.output)
+    input_file = Path(args.input)
+    output_dir = Path(args.output)
+    # output_dir = Path(config.GENERAL.processed_output_dir) / "chunks"
 
     chunk_audio(
-        input_file=input_path,
-        output_dir=output_path,
+        input_file=input_file,
+        output_dir=output_dir,
         max_duration_sec=config.CHUNKING.max_chunk_duration_sec,
         silence_thresh_db=config.CHUNKING.silence_noise_threshold_db,
         min_silence_len_sec=config.CHUNKING.min_silence_duration_sec,

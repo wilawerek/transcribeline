@@ -15,9 +15,10 @@ language = "pl"
 [DIARIZATION]
 enabled = true
 model = "pyannote/speaker-diarization"
+# token = "moved to .env"
 
 [POSTPROCESSING]
 substitutions_file = "config/substitutions.json"
 
 [PARALLEL]
-parallel_workers = 4
+parallel_workers = 3
