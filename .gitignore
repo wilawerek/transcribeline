@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+*.pyd
+.Python
+build/
+dist/
+*.log
+
+# Environment
+.venv/
+.env
+.env.*
+
+# Pytest
+.cache/
+
+# VSCode and other IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Data and outputs
+data/processed/
+out/
+
+# Mac/Linux OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.container
+*.pid
+*.log
+
+# Misc
+*.bak
+*.swp
+*.tmp
+*.old
