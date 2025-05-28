@@ -1,0 +1,23 @@
+[GENERAL]
+raw_audio_dir = "data/raw"
+processed_output_dir = "data/processed"
+
+[CHUNKING]
+max_chunk_duration_sec = 600
+silence_noise_threshold_db = -40
+min_silence_duration_sec = 1.0
+keep_silence_ms = 500
+
+[WHISPER]
+model = "small"
+language = "pl"
+
+[DIARIZATION]
+enabled = true
+model = "pyannote/speaker-diarization"
+
+[POSTPROCESSING]
+substitutions_file = "config/substitutions.json"
+
+[PARALLEL]
+parallel_workers = 4
