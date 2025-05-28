@@ -15,7 +15,12 @@ def diarize_audio(audio_path: Path, output_path: Path, pipeline_name: str, auth_
     from pyannote.audio import Pipeline
 
     # Load the diarization pipeline inside each process
-    pipeline = Pipeline.from_pretrained(pipeline_name, use_auth_token=auth_token)
+    try:
+        pipeline = Pipeline.from_pretrained(pipeline_name, use_auth_token=auth_token)
+    except Exception as e:
+        logger.error(f"Failed to load pipeline '{pipeline_name}': {e}")
+        return
+
     try:
         logger.info(f"Starting diarization: {audio_path.name}")
         diarization = pipeline(str(audio_path))
