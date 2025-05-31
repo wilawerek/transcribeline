@@ -1,8 +1,10 @@
 import argparse
 
 from config.config import DEFAULT_CONFIG_PATH
+from src.aligner import cli_entry as aligner_cli_entry
 from src.chunker import cli_entry as chunk_cli_entry
 from src.diarizer import cli_entry as diarizer_cli_entry
+from src.postprocessor import cli_entry as postprocess_cli_entry
 from src.transcriber import cli_entry as transcribe_cli_entry
 from src.utils import load_config, setup_logger
 
@@ -25,10 +27,14 @@ def run_diarization(args):
     diarizer_cli_entry(args)
 
 
+def run_aligning(args):
+    logger.info("Running aligning module...")
+    aligner_cli_entry(args)
+
+
 def run_postprocessing(args):
     logger.info("Running postprocessing module...")
-    # Stub for postproc.py entrypoint
-    pass
+    postprocess_cli_entry(args)
 
 
 def run_merging(args):
@@ -64,7 +70,26 @@ def main():
     )
     diarizer_parser.set_defaults(func=run_diarization)
 
-    subparsers.add_parser("postprocess", help="Run the postprocessing step").set_defaults(func=run_postprocessing)
+    aligner_parser = subparsers.add_parser("align", help="Align transcription and diarization outputs")
+    aligner_parser.add_argument(
+        "--transcriptions", required=True, nargs="+", help="Path(s) to transcription .json files or directories"
+    )
+    aligner_parser.add_argument(
+        "--diarizations", required=True, nargs="+", help="Path(s) to diarization .rttm files or directories"
+    )
+    aligner_parser.add_argument("--output", required=True, help="Directory to save aligned .json files")
+    # aligner_parser.add_argument(
+    #     "--config", default="config/settings.toml", help="Path to the TOML config file"
+    # )
+    aligner_parser.set_defaults(func=run_aligning)
+
+    postprocess_parser = subparsers.add_parser("postprocess", help="Run the postprocessing step")
+    postprocess_parser.add_argument(
+        "--inputs", required=True, nargs="+", help="Path(s) to aligned JSON files or directories containing them"
+    )
+    postprocess_parser.add_argument("--output", required=True, help="Path to the output formatted text file")
+    postprocess_parser.set_defaults(func=run_postprocessing)
+
     subparsers.add_parser("merge", help="Run the merging step").set_defaults(func=run_merging)
 
     args = parser.parse_args()
