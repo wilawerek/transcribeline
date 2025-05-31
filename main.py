@@ -59,6 +59,9 @@ def main():
     diarizer_parser = subparsers.add_parser("diarize", help="Run the diarization step")
     diarizer_parser.add_argument("--input", required=True, nargs="+", help="Path(s) to .wav files or directories")
     diarizer_parser.add_argument("--output", required=True, help="Directory to save diarization RTTM files")
+    diarizer_parser.add_argument(
+        "--num-speakers", type=int, help="Optional: number of speakers to force in diarization"
+    )
     diarizer_parser.set_defaults(func=run_diarization)
 
     subparsers.add_parser("postprocess", help="Run the postprocessing step").set_defaults(func=run_postprocessing)

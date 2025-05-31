@@ -1,5 +1,3 @@
-import os
-import subprocess
 from pathlib import Path
 
 from pydub import AudioSegment, silence
@@ -20,6 +18,7 @@ def chunk_audio(
 ):
     logger.info(f"Loading audio file: {input_file}")
     audio = AudioSegment.from_wav(input_file)
+    base_name = input_file.stem
 
     logger.info("Detecting silent chunks...")
     silent_ranges = silence.detect_silence(
@@ -32,8 +31,8 @@ def chunk_audio(
     silent_ranges = [(start, end) for start, end in silent_ranges if end - start > 200]
     if not silent_ranges:
         logger.warning("No silent ranges found. Exporting original file as a single chunk.")
-        audio.export(output_dir / f"chunk_0.wav", format="wav")
-        print("[chunker] Exported chunk_0.wav")
+        audio.export(output_dir / f"{base_name}_0.wav", format="wav")
+        # print("[chunker] Exported chunk_0.wav")
         return
 
     chunks = []
@@ -50,13 +49,14 @@ def chunk_audio(
 
     logger.info(f"Exporting {len(chunks)} chunks...")
     output_dir.mkdir(parents=True, exist_ok=True)
-    for idx, chunk in tqdm(list(enumerate(chunks)), total=len(chunks), desc="[chunker] Exporting"):
-        chunk_path = output_dir / f"chunk_{idx}.wav"
+    # for idx, chunk in tqdm(list(enumerate(chunks)), total=len(chunks), desc="[chunker] Exporting"):
+    for idx, chunk in list(enumerate(chunks)):
+        chunk_path = output_dir / f"{base_name}_{idx}.wav"
         chunk.export(chunk_path, format="wav")
-        print(f"[chunker] Exported: {chunk_path.name}")
+        # print(f"[chunker] Exported: {chunk_path.name}")
 
     logger.info("Chunking complete.")
-    print("[chunker] Done.")
+    # print("[chunker] Done.")
 
 
 def cli_entry(args):

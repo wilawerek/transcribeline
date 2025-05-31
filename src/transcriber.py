@@ -64,5 +64,6 @@ def cli_entry(args):
             for audio_file in audio_files
         }
 
-        for future in tqdm(as_completed(futures), total=len(futures), desc="Transcribing"):
+        # for future in tqdm(as_completed(futures), total=len(futures), desc="Transcribing"):
+        for future in as_completed(futures):
             future.result()
