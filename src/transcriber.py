@@ -1,6 +1,5 @@
 import json
 import logging
-import warnings
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
@@ -12,13 +11,12 @@ logger = setup_logger("transcriber")
 
 
 def transcribe_audio(audio_path: Path, output_path: Path, model: str, language: str, logger: logging.Logger):
+    # import warnings
+    # warnings.filterwarnings("ignore", category=UserWarning)
 
     import whisper
 
-    # Suppress FP16 warning when running on CPU
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore", category=UserWarning)
-        model = whisper.load_model(model)
+    model = whisper.load_model(model)
 
     try:
         logger.info(f"Starting transcription: {audio_path.name}")

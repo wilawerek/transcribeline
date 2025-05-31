@@ -38,7 +38,7 @@ def run_subprocess(command: list[str]):
         logger.info("Step completed successfully")
 
 
-def run_pipeline_for_file(audio_path: Path, output_root: Path, config_path: str):
+def run_pipeline_for_file(audio_path: Path, output_root: Path, config_path: Path):
     """
     For a single audio file, create a working directory structure and run all pipeline steps in sequence.
     """
@@ -47,45 +47,75 @@ def run_pipeline_for_file(audio_path: Path, output_root: Path, config_path: str)
     # Create subdirectories
     chunks_dir = audio_dir / "chunks"
     transcripts_dir = audio_dir / "transcripts"
-    diarz_dir = audio_dir / "diarizations"
+    diarizations_dir = audio_dir / "diarizations"
     aligns_dir = audio_dir / "aligns"
-    formatted_file = audio_dir / "formatted" / "merged.txt"
+    formatted_file = audio_dir / "formatted" / f"{stem}.txt"
 
-    for d in (chunks_dir, transcripts_dir, diarz_dir, aligns_dir, formatted_file.parent):
+    for d in (chunks_dir, transcripts_dir, diarizations_dir, aligns_dir, formatted_file.parent):
         d.mkdir(parents=True, exist_ok=True)
 
     # 1) Chunk
-    run_subprocess(["python", "main.py", "chunk", "--input", str(audio_path), "--output", str(chunks_dir)])
+    run_subprocess(
+        ["python", "main.py", "--config", config_path, "chunk", "--input", str(audio_path), "--output", str(chunks_dir)]
+    )
 
     # 2) Transcribe
-    run_subprocess(["python", "main.py", "transcribe", "--input", str(chunks_dir), "--output", str(transcripts_dir)])
+    run_subprocess(
+        [
+            "python",
+            "main.py",
+            "--config",
+            config_path,
+            "transcribe",
+            "--input",
+            str(chunks_dir),
+            "--output",
+            str(transcripts_dir),
+        ]
+    )
 
     # 3) Diarize
-    run_subprocess(["python", "main.py", "diarize", "--input", str(chunks_dir), "--output", str(diarz_dir)])
+    run_subprocess(
+        [
+            "python",
+            "main.py",
+            "--config",
+            config_path,
+            "diarize",
+            "--input",
+            str(chunks_dir),
+            "--output",
+            str(diarizations_dir),
+        ]
+    )
 
     # 4) Align
     run_subprocess(
         [
             "python",
             "main.py",
+            "--config",
+            config_path,
             "align",
             "--transcriptions",
             str(transcripts_dir),
             "--diarizations",
-            str(diarz_dir),
+            str(diarizations_dir),
             "--output",
             str(aligns_dir),
         ]
     )
 
-    # 5) Postprocess (merge+format)
+    # 5) Postprocess (merge + format)
     run_subprocess(
         [
             "python",
             "main.py",
+            "--config",
+            config_path,
             "postprocess",
-            "--inputs",
-            str(aligns_dir),
+            "--input",
+            *([str(aligns_dir)]),
             "--output",
             str(formatted_file),
         ]
@@ -96,7 +126,7 @@ def run_pipeline_for_file(audio_path: Path, output_root: Path, config_path: str)
 
 def main():
     parser = argparse.ArgumentParser(description="Full audio processing pipeline")
-    parser.add_argument("inputs", nargs="+", help="Path(s) or glob patterns to audio files (e.g. *.wav)")
+    parser.add_argument("input", nargs="+", help="Path(s) or glob patterns to audio files (e.g. *.wav)")
     parser.add_argument(
         "--output-root",
         default="data/processed/pipeline_outputs",
@@ -106,13 +136,15 @@ def main():
     args = parser.parse_args()
 
     # Expand input patterns into actual file paths
-    audio_files = expand_audio_inputs(args.inputs)
+    audio_files = expand_audio_inputs(args.input)
     if not audio_files:
-        logger.error(f"No valid audio files found for patterns: {args.inputs}")
+        logger.error(f"No valid audio files found for patterns: {args.input}")
         return
 
     output_root = Path(args.output_root)
     output_root.mkdir(parents=True, exist_ok=True)
+
+    # config_path = Path(args.config)
 
     for audio_path in audio_files:
         try:

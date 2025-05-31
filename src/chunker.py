@@ -51,7 +51,7 @@ def chunk_audio(
     output_dir.mkdir(parents=True, exist_ok=True)
     # for idx, chunk in tqdm(list(enumerate(chunks)), total=len(chunks), desc="[chunker] Exporting"):
     for idx, chunk in list(enumerate(chunks)):
-        chunk_path = output_dir / f"{base_name}_{idx}.wav"
+        chunk_path = output_dir / f"{base_name}_{idx:02d}.wav"
         chunk.export(chunk_path, format="wav")
         # print(f"[chunker] Exported: {chunk_path.name}")
 
