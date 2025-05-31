@@ -11,10 +11,16 @@ from src.utils import load_config, setup_logger
 logger = setup_logger("diarizer")
 
 
-def diarize_audio(audio_path: Path, output_path: Path, pipeline_name: str, auth_token: str, logger: logging.Logger):
+def diarize_audio(
+    audio_path: Path,
+    output_path: Path,
+    pipeline_name: str,
+    auth_token: str,
+    logger: logging.Logger,
+    max_speakers: int | None = None,
+):
     from pyannote.audio import Pipeline
 
-    # Load the diarization pipeline inside each process
     try:
         pipeline = Pipeline.from_pretrained(pipeline_name, use_auth_token=auth_token)
     except Exception as e:
@@ -23,7 +29,11 @@ def diarize_audio(audio_path: Path, output_path: Path, pipeline_name: str, auth_
 
     try:
         logger.info(f"Starting diarization: {audio_path.name}")
-        diarization = pipeline(str(audio_path))
+        if max_speakers:
+            diarization = pipeline(str(audio_path), num_speakers=max_speakers)
+        else:
+            diarization = pipeline(str(audio_path))
+
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(diarization.to_rttm())
         logger.info(f"Diarized: {audio_path.name}")
@@ -36,6 +46,7 @@ def cli_entry(args):
     config = load_config(args.config)
     output_dir = Path(args.output)
     output_dir.mkdir(parents=True, exist_ok=True)
+    max_speakers = getattr(config.DIARIZATION, "max_speakers", None)
 
     # Collect input .wav files from files or directories
     input_paths = [Path(p) for p in args.input]
@@ -65,7 +76,13 @@ def cli_entry(args):
     with ProcessPoolExecutor(max_workers=config.PARALLEL.parallel_workers) as executor:
         futures = {
             executor.submit(
-                diarize_audio, audio_file, output_dir / f"{audio_file.stem}.rttm", pipeline_name, auth_token, logger
+                diarize_audio,
+                audio_file,
+                output_dir / f"{audio_file.stem}.rttm",
+                pipeline_name,
+                auth_token,
+                logger,
+                max_speakers,
             ): audio_file
             for audio_file in audio_files
         }
