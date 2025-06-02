@@ -27,6 +27,7 @@ dist/                # Ignore dist directory at the root
 data/                # Your raw and processed data
 out/                 # Any other general output directory
 logs/                # Your log files
+app/logs/            # App log files
 
 # Mac/Linux OS specific files
 .DS_Store            # macOS directory service store
