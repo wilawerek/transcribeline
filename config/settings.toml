@@ -5,7 +5,7 @@ min_silence_duration_sec = 0.5
 keep_silence_ms = 500
 
 [WHISPER]
-model = "small"
+model = "turbo"
 language = "pl"
 
 [DIARIZATION]
