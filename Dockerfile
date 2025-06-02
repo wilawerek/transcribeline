@@ -1,12 +1,11 @@
-# --- Stage 1: Build Stage (Recommended for Efficiency) ---
+# --- Stage 1: Build Stage ---
 FROM python:3.11-slim-bookworm AS builder
 
-# Set a working directory inside the builder stage
-WORKDIR /app
+# Set a temporary working directory for dependency installation
+WORKDIR /tmp/build
 
-# Copy only the requirements file first to leverage Docker's build cache
-# Assumes requirements.txt is in the root of your project
-COPY requirements.txt .
+# Copy the requirements file from your app directory to the build stage
+COPY app/requirements.txt .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
@@ -14,33 +13,27 @@ RUN pip install --no-cache-dir -r requirements.txt
 # --- Stage 2: Runtime Stage ---
 FROM python:3.11-slim-bookworm
 
-# Set metadata (optional but good practice)
+# Set metadata
 LABEL author="Emil Wilawer"
 LABEL description="Audio Transcription and Diarization Pipeline"
 
-# Set the working directory for your application
+# Set the primary working directory for your application's code
 WORKDIR /app
 
-# Copy the installed packages from the builder stage
-# This ensures all pip dependencies are available in the final slim image
+# Copy the installed Python packages from the builder stage
 COPY --from=builder /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
 
-# Copy your entire project directory into the container
-# This includes pipeline.py, and any default config/substitutions files
-# Ensure your 'config' folder and its contents are included here if you have defaults
-COPY . .
+# Copy only the contents of your 'app' directory into the container's /app
+COPY app/ .
 
 # Install necessary system dependencies for audio processing
-# ffmpeg for audio handling, libsndfile1 for audio file reading/writing
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+    apt install -y --no-install-recommends \
         ffmpeg \
         libsndfile1 \
-        # Add any other system dependencies your Python packages rely on if needed
-    && rm -rf /var/lib/apt/lists/* # Clean up apt cache
+    && rm -rf /var/lib/apt/lists/*
 
 # Set the entrypoint to your main pipeline script
-# This makes 'docker run <image_name> <args>' directly pass <args> to 'python pipeline.py'
 ENTRYPOINT ["python", "pipeline.py"]
 
 # Provide a default command if no arguments are given (e.g., show help)
