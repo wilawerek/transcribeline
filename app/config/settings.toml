@@ -18,4 +18,4 @@ max_sepakers = 2
 substitutions_file = "config/substitutions.json"
 
 [PARALLEL]
-parallel_workers = 6
+parallel_workers = 5

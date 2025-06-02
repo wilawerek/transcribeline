@@ -1,4 +1,4 @@
-version: '3.8'
+# version: '3.8'
 
 services:
   transcribeline:
@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     environment:
       - HF_TOKEN=${HF_TOKEN} # Load HF_TOKEN from .env file
-    # user: "${UID}:${GID}"
+    # user: "${UID}:${GID}" # Load User ID and Group ID from .env file
     volumes:
       - ./data/raw:/app/data/raw
       - ./data/processed:/app/data/processed
@@ -22,9 +22,3 @@ services:
     #         - driver: nvidia
     #           count: all
     #           capabilities: [gpu]
-    # --- REMOVE THIS ENTIRE 'command:' SECTION ---
-    # command: >
-    #   python pipeline.py
-    #   /app/data/raw/BU_NI_01_demo_5min.wav
-    #   --output-root /app/data/processed
-    #   --config /app/config/settings.toml
