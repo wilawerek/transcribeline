@@ -6,7 +6,8 @@ from pathlib import Path
 
 from src.utils import load_config, setup_logger
 
-logger = setup_logger("pipeline")
+LOG_DIR = "logs" 
+logger = setup_logger("pipeline", log_dir=LOG_DIR)
 
 
 def expand_audio_inputs(patterns: list[str]) -> list[Path]:
