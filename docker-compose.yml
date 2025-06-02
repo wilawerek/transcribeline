@@ -13,6 +13,7 @@ services:
       - ./data/processed:/app/data/processed
       - ./logs:/app/logs
       - ./app/config/settings.toml:/app/config/settings.toml
+      - ./whisper_cache:/root/.cache/whisper
     # deploy:
     #   resources:
     #     reservations:

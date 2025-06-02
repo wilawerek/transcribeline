@@ -17,6 +17,9 @@ dist/                # Ignore dist directory at the root
 # Pytest
 .pytest_cache/       # Pytest cache directory
 
+# Whisper
+whisper_cache/
+
 # VSCode and other IDEs
 .vscode/             # VSCode configuration
 .idea/               # IntelliJ/PyCharm configuration
