@@ -1,0 +1,6 @@
+2025-06-02 12:01:48 [INFO] Starting pipeline for BU_NI_01_demo_5min.wav
+2025-06-02 12:01:48 [INFO] Running: python main.py --config config/settings.toml chunk --input /home/wilawerek/Dev/python/transcription_pipeline/data/raw/BU_NI_01_demo_5min.wav --output ../data/test/BU_NI_01_demo_5min/chunks
+2025-06-02 12:01:57 [INFO] Step completed successfully
+2025-06-02 12:01:57 [INFO] Running: python main.py --config config/settings.toml transcribe --input ../data/test/BU_NI_01_demo_5min/chunks --output ../data/test/BU_NI_01_demo_5min/transcripts
+2025-06-02 12:07:52 [INFO] Step completed successfully
+2025-06-02 12:07:52 [INFO] Running: python main.py --config config/settings.toml diarize --input ../data/test/BU_NI_01_demo_5min/chunks --output ../data/test/BU_NI_01_demo_5min/diarizations
