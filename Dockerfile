@@ -23,15 +23,15 @@ WORKDIR /app
 # Copy the installed Python packages from the builder stage
 COPY --from=builder /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
 
-# Copy only the contents of your 'app' directory into the container's /app
-COPY app/ .
-
 # Install necessary system dependencies for audio processing
 RUN apt-get update && \
     apt install -y --no-install-recommends \
         ffmpeg \
         libsndfile1 \
     && rm -rf /var/lib/apt/lists/*
+
+# Copy only the contents of your 'app' directory into the container's /app
+COPY app/ .
 
 # Set the entrypoint to your main pipeline script
 ENTRYPOINT ["python", "pipeline.py"]

@@ -8,6 +8,7 @@ services:
       dockerfile: Dockerfile
     environment:
       - HF_TOKEN=${HF_TOKEN} # Load HF_TOKEN from .env file
+    # user: "${UID}:${GID}"
     volumes:
       - ./data/raw:/app/data/raw
       - ./data/processed:/app/data/processed
