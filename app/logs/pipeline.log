@@ -1,0 +1,50 @@
+2025-06-03 14:07:51 [INFO] Starting pipeline for BU_NI_2.wav
+2025-06-03 14:07:51 [ERROR] Pipeline failed for BU_NI_2.wav: [Errno 13] Permission denied: '../data/processed/pipeline_output/BU_NI_2'
+2025-06-03 14:11:21 [INFO] Starting pipeline for BU_NI_2.wav
+2025-06-03 14:11:21 [INFO] Running: python main.py --config ../data/raw/BU_NI_2_settings.toml chunk --input /home/wilawerek/Dev/python/transcription_pipeline/data/raw/BU_NI_2.wav --output ../data/processed/pipeline_output/BU_NI_2/chunks
+2025-06-03 14:13:56 [INFO] Step completed successfully
+2025-06-03 14:13:56 [INFO] Running: python main.py --config ../data/raw/BU_NI_2_settings.toml transcribe --input ../data/processed/pipeline_output/BU_NI_2/chunks --output ../data/processed/pipeline_output/BU_NI_2/transcripts
+2025-06-03 14:44:30 [INFO] Starting pipeline for BU_NI_2.wav
+2025-06-03 14:44:30 [INFO] Running: python main.py --config ../data/raw/BU_NI_2_settings.toml chunk --input /home/wilawerek/Dev/python/transcription_pipeline/data/raw/BU_NI_2.wav --output ../data/processed/pipeline_output/BU_NI_2/chunks
+2025-06-03 14:47:06 [INFO] Step completed successfully
+2025-06-03 14:47:06 [INFO] Running: python main.py --config ../data/raw/BU_NI_2_settings.toml transcribe --input ../data/processed/pipeline_output/BU_NI_2/chunks --output ../data/processed/pipeline_output/BU_NI_2/transcripts
+2025-06-03 19:35:44 [INFO] Step completed successfully
+2025-06-03 19:35:44 [INFO] Running: python main.py --config ../data/raw/BU_NI_2_settings.toml diarize --input ../data/processed/pipeline_output/BU_NI_2/chunks --output ../data/processed/pipeline_output/BU_NI_2/diarizations
+2025-06-03 21:36:44 [INFO] Step completed successfully
+2025-06-03 21:36:44 [INFO] Running: python main.py --config ../data/raw/BU_NI_2_settings.toml align --transcriptions ../data/processed/pipeline_output/BU_NI_2/transcripts --diarizations ../data/processed/pipeline_output/BU_NI_2/diarizations --output ../data/processed/pipeline_output/BU_NI_2/aligns
+2025-06-03 21:36:44 [INFO] Step completed successfully
+2025-06-03 21:36:44 [INFO] Running: python main.py --config ../data/raw/BU_NI_2_settings.toml postprocess --input ../data/processed/pipeline_output/BU_NI_2/aligns --output ../data/processed/pipeline_output/BU_NI_2/formatted/BU_NI_2.txt
+2025-06-03 21:36:45 [INFO] Step completed successfully
+2025-06-03 21:36:45 [INFO] Pipeline complete for BU_NI_2.wav. Final file: ../data/processed/pipeline_output/BU_NI_2/formatted/BU_NI_2.txt
+2025-06-04 12:18:07 [INFO] Starting pipeline for BU_WZ_2.wav
+2025-06-04 12:18:07 [INFO] Running: python main.py --config ../data/raw/BU_WZ_2_settings.toml chunk --input /home/wilawerek/Dev/python/transcription_pipeline/data/raw/BU_WZ_2.wav --output ../data/processed/pipeline_outputs/BU_WZ_2/chunks
+2025-06-04 12:21:11 [INFO] Step completed successfully
+2025-06-04 12:21:11 [INFO] Running: python main.py --config ../data/raw/BU_WZ_2_settings.toml transcribe --input ../data/processed/pipeline_outputs/BU_WZ_2/chunks --output ../data/processed/pipeline_outputs/BU_WZ_2/transcripts
+2025-06-04 12:26:03 [INFO] Starting pipeline for BU_WZ_2.wav
+2025-06-04 12:26:03 [INFO] Running: python main.py --config ../data/raw/BU_WZ_2_settings.toml chunk --input /home/wilawerek/Dev/python/transcription_pipeline/data/raw/BU_WZ_2.wav --output ../data/processed/pipeline_outputs/BU_WZ_2/chunks
+2025-06-04 12:26:03 [ERROR] Command failed: python main.py --config ../data/raw/BU_WZ_2_settings.toml chunk --input /home/wilawerek/Dev/python/transcription_pipeline/data/raw/BU_WZ_2.wav --output ../data/processed/pipeline_outputs/BU_WZ_2/chunks
+2025-06-04 12:26:03 [ERROR] Pipeline failed for BU_WZ_2.wav: Step failed: python main.py --config ../data/raw/BU_WZ_2_settings.toml chunk --input /home/wilawerek/Dev/python/transcription_pipeline/data/raw/BU_WZ_2.wav --output ../data/processed/pipeline_outputs/BU_WZ_2/chunks
+2025-06-04 12:26:13 [INFO] Starting pipeline for BU_WZ_2.wav
+2025-06-04 12:26:13 [INFO] Running: python main.py --config ../data/raw/BU_WZ_2_settings.toml chunk --input /home/wilawerek/Dev/python/transcription_pipeline/data/raw/BU_WZ_2.wav --output ../data/processed/pipeline_outputs/BU_WZ_2/chunks
+2025-06-04 12:29:16 [INFO] Step completed successfully
+2025-06-04 12:29:16 [INFO] Running: python main.py --config ../data/raw/BU_WZ_2_settings.toml transcribe --input ../data/processed/pipeline_outputs/BU_WZ_2/chunks --output ../data/processed/pipeline_outputs/BU_WZ_2/transcripts
+2025-06-04 17:17:28 [INFO] Step completed successfully
+2025-06-04 17:17:28 [INFO] Running: python main.py --config ../data/raw/BU_WZ_2_settings.toml diarize --input ../data/processed/pipeline_outputs/BU_WZ_2/chunks --output ../data/processed/pipeline_outputs/BU_WZ_2/diarizations
+2025-06-04 19:13:31 [INFO] Step completed successfully
+2025-06-04 19:13:31 [INFO] Running: python main.py --config ../data/raw/BU_WZ_2_settings.toml align --transcriptions ../data/processed/pipeline_outputs/BU_WZ_2/transcripts --diarizations ../data/processed/pipeline_outputs/BU_WZ_2/diarizations --output ../data/processed/pipeline_outputs/BU_WZ_2/aligns
+2025-06-04 19:13:32 [INFO] Step completed successfully
+2025-06-04 19:13:32 [INFO] Running: python main.py --config ../data/raw/BU_WZ_2_settings.toml postprocess --input ../data/processed/pipeline_outputs/BU_WZ_2/aligns --output ../data/processed/pipeline_outputs/BU_WZ_2/formatted/BU_WZ_2.txt
+2025-06-04 19:13:32 [INFO] Step completed successfully
+2025-06-04 19:13:32 [INFO] Pipeline complete for BU_WZ_2.wav. Final file: ../data/processed/pipeline_outputs/BU_WZ_2/formatted/BU_WZ_2.txt
+2025-06-05 06:42:48 [INFO] Starting pipeline for BU_CI_1.wav
+2025-06-05 06:42:48 [INFO] Running: python main.py --config ../data/raw/BU_CI_1.toml chunk --input /home/wilawerek/Dev/python/transcription_pipeline/data/raw/BU_CI_1.wav --output ../data/processed/pipeline_outputs/turbo/BU_CI_1/chunks
+2025-06-05 06:44:31 [INFO] Step completed successfully
+2025-06-05 06:44:31 [INFO] Running: python main.py --config ../data/raw/BU_CI_1.toml transcribe --input ../data/processed/pipeline_outputs/turbo/BU_CI_1/chunks --output ../data/processed/pipeline_outputs/turbo/BU_CI_1/transcripts
+2025-06-05 08:50:30 [INFO] Step completed successfully
+2025-06-05 08:50:30 [INFO] Running: python main.py --config ../data/raw/BU_CI_1.toml diarize --input ../data/processed/pipeline_outputs/turbo/BU_CI_1/chunks --output ../data/processed/pipeline_outputs/turbo/BU_CI_1/diarizations
+2025-06-05 09:59:45 [INFO] Step completed successfully
+2025-06-05 09:59:45 [INFO] Running: python main.py --config ../data/raw/BU_CI_1.toml align --transcriptions ../data/processed/pipeline_outputs/turbo/BU_CI_1/transcripts --diarizations ../data/processed/pipeline_outputs/turbo/BU_CI_1/diarizations --output ../data/processed/pipeline_outputs/turbo/BU_CI_1/aligns
+2025-06-05 09:59:45 [INFO] Step completed successfully
+2025-06-05 09:59:45 [INFO] Running: python main.py --config ../data/raw/BU_CI_1.toml postprocess --input ../data/processed/pipeline_outputs/turbo/BU_CI_1/aligns --output ../data/processed/pipeline_outputs/turbo/BU_CI_1/formatted/BU_CI_1.txt
+2025-06-05 09:59:46 [INFO] Step completed successfully
+2025-06-05 09:59:46 [INFO] Pipeline complete for BU_CI_1.wav. Final file: ../data/processed/pipeline_outputs/turbo/BU_CI_1/formatted/BU_CI_1.txt

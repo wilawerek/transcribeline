@@ -8,6 +8,7 @@ from src.utils import setup_logger
 
 logger = setup_logger("postprocessing")
 
+
 def collect_aligned_files(inputs: list[str]) -> list[Path]:
     files = []
     for pattern in sorted(inputs):
@@ -19,10 +20,12 @@ def collect_aligned_files(inputs: list[str]) -> list[Path]:
                 files.append(path)
     return files
 
+
 def extract_chunk_index(path: Path) -> int:
     # Extract numeric index from filename like chunk_0001.aligned.json
     match = re.search(r".*_(\d+)\.aligned\.json", path.name)
     return int(match.group(1)) if match else 0
+
 
 def merge_aligned_chunks(input_patterns: list[str], output_file: Path):
     speaker_blocks = []
@@ -64,10 +67,10 @@ def merge_aligned_chunks(input_patterns: list[str], output_file: Path):
     last_speaker = None
     buffer = []
 
-    for _, speaker, text in speaker_blocks:
+    for start, speaker, text in speaker_blocks:
         if speaker != last_speaker:
             if buffer:
-                formatted_lines.append(f"[SPEAKER {last_speaker}]\n" + " ".join(buffer) + "\n")
+                formatted_lines.append(f"[SPEAKER {last_speaker}] ({start:.2f})\n" + " ".join(buffer) + "\n")
                 buffer = []
             last_speaker = speaker
         buffer.append(text)
@@ -81,9 +84,11 @@ def merge_aligned_chunks(input_patterns: list[str], output_file: Path):
 
     logger.info(f"Merged and formatted file saved to {output_file}")
 
+
 def cli_entry(args):
     try:
         from dotenv import load_dotenv
+
         load_dotenv()
     except ImportError:
         pass

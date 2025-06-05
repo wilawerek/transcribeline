@@ -1,0 +1,195 @@
+2025-06-03 19:35:45 [INFO] Found 38 files. Starting diarization...
+2025-06-03 19:35:57 [INFO] Starting diarization: BU_NI_2_33.wav
+2025-06-03 19:35:57 [INFO] Starting diarization: BU_NI_2_17.wav
+2025-06-03 19:35:57 [INFO] Starting diarization: BU_NI_2_19.wav
+2025-06-03 19:35:58 [INFO] Starting diarization: BU_NI_2_25.wav
+2025-06-03 19:35:58 [INFO] Starting diarization: BU_NI_2_22.wav
+2025-06-03 19:50:12 [INFO] Diarized: BU_NI_2_17.wav
+2025-06-03 19:50:15 [INFO] Starting diarization: BU_NI_2_13.wav
+2025-06-03 19:50:54 [INFO] Diarized: BU_NI_2_33.wav
+2025-06-03 19:50:56 [INFO] Starting diarization: BU_NI_2_11.wav
+2025-06-03 19:51:18 [INFO] Diarized: BU_NI_2_19.wav
+2025-06-03 19:51:21 [INFO] Starting diarization: BU_NI_2_31.wav
+2025-06-03 19:51:40 [INFO] Diarized: BU_NI_2_22.wav
+2025-06-03 19:51:41 [INFO] Starting diarization: BU_NI_2_29.wav
+2025-06-03 19:54:23 [INFO] Diarized: BU_NI_2_25.wav
+2025-06-03 19:54:26 [INFO] Starting diarization: BU_NI_2_28.wav
+2025-06-03 20:04:58 [INFO] Diarized: BU_NI_2_13.wav
+2025-06-03 20:05:01 [INFO] Starting diarization: BU_NI_2_34.wav
+2025-06-03 20:05:49 [INFO] Diarized: BU_NI_2_31.wav
+2025-06-03 20:05:51 [INFO] Starting diarization: BU_NI_2_26.wav
+2025-06-03 20:06:25 [INFO] Diarized: BU_NI_2_11.wav
+2025-06-03 20:06:27 [INFO] Starting diarization: BU_NI_2_01.wav
+2025-06-03 20:10:16 [INFO] Diarized: BU_NI_2_29.wav
+2025-06-03 20:10:18 [INFO] Starting diarization: BU_NI_2_10.wav
+2025-06-03 20:11:45 [INFO] Diarized: BU_NI_2_28.wav
+2025-06-03 20:11:48 [INFO] Starting diarization: BU_NI_2_24.wav
+2025-06-03 20:19:41 [INFO] Diarized: BU_NI_2_01.wav
+2025-06-03 20:19:44 [INFO] Starting diarization: BU_NI_2_04.wav
+2025-06-03 20:26:29 [INFO] Diarized: BU_NI_2_26.wav
+2025-06-03 20:26:32 [INFO] Starting diarization: BU_NI_2_23.wav
+2025-06-03 20:26:50 [INFO] Diarized: BU_NI_2_24.wav
+2025-06-03 20:26:53 [INFO] Starting diarization: BU_NI_2_09.wav
+2025-06-03 20:28:29 [INFO] Diarized: BU_NI_2_10.wav
+2025-06-03 20:28:32 [INFO] Starting diarization: BU_NI_2_20.wav
+2025-06-03 20:32:14 [INFO] Diarized: BU_NI_2_04.wav
+2025-06-03 20:32:17 [INFO] Starting diarization: BU_NI_2_02.wav
+2025-06-03 20:41:29 [INFO] Diarized: BU_NI_2_09.wav
+2025-06-03 20:41:32 [INFO] Starting diarization: BU_NI_2_27.wav
+2025-06-03 20:42:42 [INFO] Diarized: BU_NI_2_20.wav
+2025-06-03 20:42:45 [INFO] Starting diarization: BU_NI_2_08.wav
+2025-06-03 20:43:21 [INFO] Diarized: BU_NI_2_34.wav
+2025-06-03 20:43:23 [INFO] Starting diarization: BU_NI_2_07.wav
+2025-06-03 20:45:57 [INFO] Diarized: BU_NI_2_23.wav
+2025-06-03 20:45:59 [INFO] Starting diarization: BU_NI_2_32.wav
+2025-06-03 20:46:16 [INFO] Diarized: BU_NI_2_02.wav
+2025-06-03 20:46:18 [INFO] Starting diarization: BU_NI_2_37.wav
+2025-06-03 20:51:38 [INFO] Diarized: BU_NI_2_37.wav
+2025-06-03 20:51:42 [INFO] Starting diarization: BU_NI_2_15.wav
+2025-06-03 20:55:50 [INFO] Diarized: BU_NI_2_27.wav
+2025-06-03 20:55:53 [INFO] Starting diarization: BU_NI_2_35.wav
+2025-06-03 20:57:10 [INFO] Diarized: BU_NI_2_08.wav
+2025-06-03 20:57:12 [INFO] Starting diarization: BU_NI_2_30.wav
+2025-06-03 20:57:48 [INFO] Diarized: BU_NI_2_07.wav
+2025-06-03 20:57:51 [INFO] Starting diarization: BU_NI_2_03.wav
+2025-06-03 21:03:08 [INFO] Diarized: BU_NI_2_32.wav
+2025-06-03 21:03:11 [INFO] Starting diarization: BU_NI_2_12.wav
+2025-06-03 21:05:58 [INFO] Diarized: BU_NI_2_15.wav
+2025-06-03 21:06:01 [INFO] Starting diarization: BU_NI_2_21.wav
+2025-06-03 21:08:37 [INFO] Diarized: BU_NI_2_35.wav
+2025-06-03 21:08:40 [INFO] Starting diarization: BU_NI_2_16.wav
+2025-06-03 21:15:05 [INFO] Diarized: BU_NI_2_30.wav
+2025-06-03 21:15:07 [INFO] Starting diarization: BU_NI_2_36.wav
+2025-06-03 21:16:18 [INFO] Diarized: BU_NI_2_12.wav
+2025-06-03 21:16:21 [INFO] Starting diarization: BU_NI_2_18.wav
+2025-06-03 21:18:19 [INFO] Diarized: BU_NI_2_03.wav
+2025-06-03 21:18:22 [INFO] Starting diarization: BU_NI_2_05.wav
+2025-06-03 21:19:13 [INFO] Diarized: BU_NI_2_21.wav
+2025-06-03 21:19:16 [INFO] Starting diarization: BU_NI_2_14.wav
+2025-06-03 21:22:53 [INFO] Diarized: BU_NI_2_16.wav
+2025-06-03 21:22:55 [INFO] Starting diarization: BU_NI_2_00.wav
+2025-06-03 21:29:41 [INFO] Diarized: BU_NI_2_36.wav
+2025-06-03 21:29:44 [INFO] Starting diarization: BU_NI_2_06.wav
+2025-06-03 21:30:00 [INFO] Diarized: BU_NI_2_18.wav
+2025-06-03 21:31:22 [INFO] Diarized: BU_NI_2_05.wav
+2025-06-03 21:32:11 [INFO] Diarized: BU_NI_2_14.wav
+2025-06-03 21:36:24 [INFO] Diarized: BU_NI_2_06.wav
+2025-06-03 21:36:44 [INFO] Diarized: BU_NI_2_00.wav
+2025-06-04 17:17:28 [INFO] Found 45 files. Starting diarization...
+2025-06-04 17:17:37 [INFO] Starting diarization: BU_WZ_2_19.wav
+2025-06-04 17:17:38 [INFO] Starting diarization: BU_WZ_2_40.wav
+2025-06-04 17:17:38 [INFO] Starting diarization: BU_WZ_2_06.wav
+2025-06-04 17:17:38 [INFO] Starting diarization: BU_WZ_2_10.wav
+2025-06-04 17:26:09 [INFO] Diarized: BU_WZ_2_06.wav
+2025-06-04 17:26:11 [INFO] Starting diarization: BU_WZ_2_31.wav
+2025-06-04 17:27:36 [INFO] Diarized: BU_WZ_2_40.wav
+2025-06-04 17:27:38 [INFO] Starting diarization: BU_WZ_2_11.wav
+2025-06-04 17:27:47 [INFO] Diarized: BU_WZ_2_10.wav
+2025-06-04 17:27:49 [INFO] Starting diarization: BU_WZ_2_03.wav
+2025-06-04 17:27:51 [INFO] Diarized: BU_WZ_2_19.wav
+2025-06-04 17:27:53 [INFO] Starting diarization: BU_WZ_2_33.wav
+2025-06-04 17:35:15 [INFO] Diarized: BU_WZ_2_31.wav
+2025-06-04 17:35:17 [INFO] Starting diarization: BU_WZ_2_07.wav
+2025-06-04 17:36:36 [INFO] Diarized: BU_WZ_2_03.wav
+2025-06-04 17:36:38 [INFO] Starting diarization: BU_WZ_2_21.wav
+2025-06-04 17:36:41 [INFO] Diarized: BU_WZ_2_33.wav
+2025-06-04 17:36:43 [INFO] Starting diarization: BU_WZ_2_35.wav
+2025-06-04 17:39:10 [INFO] Diarized: BU_WZ_2_11.wav
+2025-06-04 17:39:12 [INFO] Starting diarization: BU_WZ_2_15.wav
+2025-06-04 17:44:01 [INFO] Diarized: BU_WZ_2_07.wav
+2025-06-04 17:44:03 [INFO] Starting diarization: BU_WZ_2_04.wav
+2025-06-04 17:45:09 [INFO] Diarized: BU_WZ_2_21.wav
+2025-06-04 17:45:11 [INFO] Starting diarization: BU_WZ_2_02.wav
+2025-06-04 17:48:34 [INFO] Diarized: BU_WZ_2_15.wav
+2025-06-04 17:48:36 [INFO] Starting diarization: BU_WZ_2_41.wav
+2025-06-04 17:50:35 [INFO] Diarized: BU_WZ_2_35.wav
+2025-06-04 17:50:37 [INFO] Starting diarization: BU_WZ_2_23.wav
+2025-06-04 17:53:32 [INFO] Diarized: BU_WZ_2_02.wav
+2025-06-04 17:53:34 [INFO] Starting diarization: BU_WZ_2_38.wav
+2025-06-04 17:57:33 [INFO] Diarized: BU_WZ_2_04.wav
+2025-06-04 17:57:35 [INFO] Starting diarization: BU_WZ_2_20.wav
+2025-06-04 18:00:55 [INFO] Diarized: BU_WZ_2_23.wav
+2025-06-04 18:00:56 [INFO] Starting diarization: BU_WZ_2_00.wav
+2025-06-04 18:01:05 [INFO] Diarized: BU_WZ_2_41.wav
+2025-06-04 18:01:07 [INFO] Starting diarization: BU_WZ_2_30.wav
+2025-06-04 18:05:09 [INFO] Diarized: BU_WZ_2_38.wav
+2025-06-04 18:05:11 [INFO] Starting diarization: BU_WZ_2_24.wav
+2025-06-04 18:06:45 [INFO] Diarized: BU_WZ_2_20.wav
+2025-06-04 18:06:46 [INFO] Starting diarization: BU_WZ_2_12.wav
+2025-06-04 18:10:11 [INFO] Diarized: BU_WZ_2_00.wav
+2025-06-04 18:10:12 [INFO] Diarized: BU_WZ_2_30.wav
+2025-06-04 18:10:13 [INFO] Starting diarization: BU_WZ_2_37.wav
+2025-06-04 18:10:14 [INFO] Starting diarization: BU_WZ_2_42.wav
+2025-06-04 18:16:20 [INFO] Diarized: BU_WZ_2_12.wav
+2025-06-04 18:16:22 [INFO] Starting diarization: BU_WZ_2_14.wav
+2025-06-04 18:17:04 [INFO] Diarized: BU_WZ_2_24.wav
+2025-06-04 18:17:05 [INFO] Starting diarization: BU_WZ_2_17.wav
+2025-06-04 18:20:02 [INFO] Diarized: BU_WZ_2_37.wav
+2025-06-04 18:20:05 [INFO] Starting diarization: BU_WZ_2_36.wav
+2025-06-04 18:21:38 [INFO] Diarized: BU_WZ_2_42.wav
+2025-06-04 18:21:39 [INFO] Starting diarization: BU_WZ_2_25.wav
+2025-06-04 18:24:58 [INFO] Diarized: BU_WZ_2_14.wav
+2025-06-04 18:25:00 [INFO] Starting diarization: BU_WZ_2_22.wav
+2025-06-04 18:25:22 [INFO] Diarized: BU_WZ_2_17.wav
+2025-06-04 18:25:23 [INFO] Starting diarization: BU_WZ_2_28.wav
+2025-06-04 18:30:11 [INFO] Diarized: BU_WZ_2_36.wav
+2025-06-04 18:30:13 [INFO] Starting diarization: BU_WZ_2_09.wav
+2025-06-04 18:34:13 [INFO] Diarized: BU_WZ_2_22.wav
+2025-06-04 18:34:15 [INFO] Starting diarization: BU_WZ_2_16.wav
+2025-06-04 18:36:11 [INFO] Diarized: BU_WZ_2_28.wav
+2025-06-04 18:36:13 [INFO] Starting diarization: BU_WZ_2_29.wav
+2025-06-04 18:39:30 [INFO] Diarized: BU_WZ_2_09.wav
+2025-06-04 18:39:32 [INFO] Starting diarization: BU_WZ_2_32.wav
+2025-06-04 18:44:35 [INFO] Diarized: BU_WZ_2_16.wav
+2025-06-04 18:44:37 [INFO] Starting diarization: BU_WZ_2_44.wav
+2025-06-04 18:45:06 [INFO] Diarized: BU_WZ_2_29.wav
+2025-06-04 18:45:08 [INFO] Starting diarization: BU_WZ_2_18.wav
+2025-06-04 18:47:55 [INFO] Diarized: BU_WZ_2_32.wav
+2025-06-04 18:47:57 [INFO] Starting diarization: BU_WZ_2_43.wav
+2025-06-04 18:48:10 [INFO] Diarized: BU_WZ_2_25.wav
+2025-06-04 18:48:13 [INFO] Starting diarization: BU_WZ_2_39.wav
+2025-06-04 18:50:20 [INFO] Diarized: BU_WZ_2_44.wav
+2025-06-04 18:50:22 [INFO] Starting diarization: BU_WZ_2_13.wav
+2025-06-04 18:57:30 [INFO] Diarized: BU_WZ_2_18.wav
+2025-06-04 18:57:32 [INFO] Starting diarization: BU_WZ_2_01.wav
+2025-06-04 18:58:09 [INFO] Diarized: BU_WZ_2_39.wav
+2025-06-04 18:58:11 [INFO] Starting diarization: BU_WZ_2_34.wav
+2025-06-04 19:01:26 [INFO] Diarized: BU_WZ_2_43.wav
+2025-06-04 19:01:28 [INFO] Starting diarization: BU_WZ_2_26.wav
+2025-06-04 19:02:19 [INFO] Diarized: BU_WZ_2_13.wav
+2025-06-04 19:02:21 [INFO] Starting diarization: BU_WZ_2_05.wav
+2025-06-04 19:06:46 [INFO] Diarized: BU_WZ_2_34.wav
+2025-06-04 19:06:48 [INFO] Starting diarization: BU_WZ_2_08.wav
+2025-06-04 19:07:44 [INFO] Diarized: BU_WZ_2_01.wav
+2025-06-04 19:07:46 [INFO] Starting diarization: BU_WZ_2_27.wav
+2025-06-04 19:11:00 [INFO] Diarized: BU_WZ_2_05.wav
+2025-06-04 19:11:25 [INFO] Diarized: BU_WZ_2_26.wav
+2025-06-04 19:13:18 [INFO] Diarized: BU_WZ_2_08.wav
+2025-06-04 19:13:31 [INFO] Diarized: BU_WZ_2_27.wav
+2025-06-05 08:50:30 [INFO] Found 13 files. Starting diarization...
+2025-06-05 08:50:40 [INFO] Starting diarization: BU_CI_1_02.wav
+2025-06-05 08:50:40 [INFO] Starting diarization: BU_CI_1_01.wav
+2025-06-05 08:50:40 [INFO] Starting diarization: BU_CI_1_12.wav
+2025-06-05 08:50:41 [INFO] Starting diarization: BU_CI_1_03.wav
+2025-06-05 08:50:41 [INFO] Starting diarization: BU_CI_1_05.wav
+2025-06-05 09:12:12 [INFO] Diarized: BU_CI_1_12.wav
+2025-06-05 09:12:14 [INFO] Starting diarization: BU_CI_1_04.wav
+2025-06-05 09:17:21 [INFO] Diarized: BU_CI_1_05.wav
+2025-06-05 09:17:23 [INFO] Starting diarization: BU_CI_1_11.wav
+2025-06-05 09:18:34 [INFO] Diarized: BU_CI_1_02.wav
+2025-06-05 09:18:36 [INFO] Starting diarization: BU_CI_1_06.wav
+2025-06-05 09:18:49 [INFO] Diarized: BU_CI_1_01.wav
+2025-06-05 09:18:51 [INFO] Starting diarization: BU_CI_1_09.wav
+2025-06-05 09:18:52 [INFO] Diarized: BU_CI_1_03.wav
+2025-06-05 09:18:54 [INFO] Starting diarization: BU_CI_1_07.wav
+2025-06-05 09:34:50 [INFO] Diarized: BU_CI_1_04.wav
+2025-06-05 09:34:52 [INFO] Starting diarization: BU_CI_1_08.wav
+2025-06-05 09:44:25 [INFO] Diarized: BU_CI_1_11.wav
+2025-06-05 09:44:27 [INFO] Starting diarization: BU_CI_1_10.wav
+2025-06-05 09:46:09 [INFO] Diarized: BU_CI_1_06.wav
+2025-06-05 09:46:12 [INFO] Starting diarization: BU_CI_1_00.wav
+2025-06-05 09:46:37 [INFO] Diarized: BU_CI_1_09.wav
+2025-06-05 09:46:43 [INFO] Diarized: BU_CI_1_07.wav
+2025-06-05 09:55:42 [INFO] Diarized: BU_CI_1_08.wav
+2025-06-05 09:59:33 [INFO] Diarized: BU_CI_1_10.wav
+2025-06-05 09:59:45 [INFO] Diarized: BU_CI_1_00.wav
