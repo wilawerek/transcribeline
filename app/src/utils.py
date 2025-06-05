@@ -35,7 +35,7 @@ def load_substitutions(path: str) -> dict:
         return json.load(f)
 
 
-def setup_logger(module_name: str = "pipeline", log_dir: str = "logs") -> logging.Logger:
+def setup_logger(module_name: str = "pipeline", log_path: str = "transcribeline.log") -> logging.Logger:
     """
     Configure and return a logger that logs both to the console and a file.
     """
@@ -50,9 +50,10 @@ def setup_logger(module_name: str = "pipeline", log_dir: str = "logs") -> loggin
     logger.addHandler(console_handler)
 
     # File handler
-    Path(log_dir).mkdir(parents=True, exist_ok=True)
-    file_handler = logging.FileHandler(Path(log_dir) / f"{module_name}.log")
-    file_formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s", "%Y-%m-%d %H:%M:%S")
+    # Path(log_dir).mkdir(parents=True, exist_ok=True)
+    # file_handler = logging.FileHandler(Path(log_dir) / f"{module_name}.log")
+    file_handler = logging.FileHandler(log_path)
+    file_formatter = logging.Formatter(f"%(asctime)s [{module_name}] [%(levelname)s] %(message)s", "%Y-%m-%d %H:%M:%S")
     file_handler.setFormatter(file_formatter)
     logger.addHandler(file_handler)
 
