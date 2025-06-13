@@ -10,6 +10,7 @@ from src.aligner import cli_entry as aligner_cli_entry
 from src.chunker import cli_entry as chunk_cli_entry
 from src.diarizer import cli_entry as diarizer_cli_entry
 from src.postprocessor import cli_entry as postprocess_cli_entry
+from src.preprocessor import cli_entry as preprocess_cli_entry
 from src.transcriber import cli_entry as transcribe_cli_entry
 from src.utils import load_config, setup_logger
 
@@ -61,6 +62,12 @@ def run_generate_config(args):
         sys.exit(1)
 
     sys.exit(0)  # Exit successfully after generating config
+
+
+def run_preprocessing(args):
+    """Executes the preprocessing module."""
+    logger.info("Running preprocessing module...")
+    preprocess_cli_entry(args)
 
 
 def run_chunking(args):
@@ -128,6 +135,14 @@ def main():
         help="Overwrite the destination file if it already exists.",
     )
     gen_config_parser.set_defaults(func=run_generate_config)
+
+    # --- PREPROCESS Subparser ---
+    preprocess_parser = subparsers.add_parser("preprocess", help="Run the audio preprocessing step.")
+    preprocess_parser.add_argument(
+        "--input", required=True, help="Path to the raw audio file to preprocess (e.g., WAV format)."
+    )
+    preprocess_parser.add_argument("--output", required=True, help="Path to save the preprocessed audio file.")
+    preprocess_parser.set_defaults(func=run_preprocessing)
 
     # --- CHUNK Subparser ---
     chunk_parser = subparsers.add_parser("chunk", help="Run the audio chunking step.")

@@ -1,10 +1,7 @@
 [CHUNKING]
 max_chunk_duration_sec = 180
-auto_threshold = true
-threshold_offset_db = -10.0  # Optional fine-tuning offset
-silence_noise_threshold_db = -20  # Used only if auto_threshold = false
-min_silence_duration_sec = 1
-keep_silence_ms = 0
+min_silence_duration_sec = 1.5  # Adjusted to favor natural pauses
+
 
 [WHISPER]
 model = "large"
