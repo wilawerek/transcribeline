@@ -1,21 +1,23 @@
 [CHUNKING]
-max_chunk_duration_sec = 120
-silence_noise_threshold_db = -20
-min_silence_duration_sec = 0.5
-keep_silence_ms = 500
+max_chunk_duration_sec = 180
+auto_threshold = true
+threshold_offset_db = -10.0  # Optional fine-tuning offset
+silence_noise_threshold_db = -20  # Used only if auto_threshold = false
+min_silence_duration_sec = 1
+keep_silence_ms = 0
 
 [WHISPER]
-model = "turbo"
+model = "large"
 language = "pl"
 
 [DIARIZATION]
 enabled = true
 model = "pyannote/speaker-diarization-3.1"
-max_sepakers = 2
+max_speakers = 2
 # token = "moved to .env"
 
 [POSTPROCESSING]
 substitutions_file = "config/substitutions.json"
 
 [PARALLEL]
-parallel_workers = 5
+parallel_workers = 1

@@ -1,9 +1,8 @@
 from pathlib import Path
 
 from pydub import AudioSegment, silence
+from src.utils import estimate_silence_threshold, load_config, setup_logger
 from tqdm import tqdm
-
-from src.utils import load_config, setup_logger
 
 logger = setup_logger("chunker")
 
@@ -31,8 +30,8 @@ def chunk_audio(
     silent_ranges = [(start, end) for start, end in silent_ranges if end - start > 200]
     if not silent_ranges:
         logger.warning("No silent ranges found. Exporting original file as a single chunk.")
+        output_dir.mkdir(parents=True, exist_ok=True)
         audio.export(output_dir / f"{base_name}_0.wav", format="wav")
-        # print("[chunker] Exported chunk_0.wav")
         return
 
     chunks = []
@@ -49,27 +48,33 @@ def chunk_audio(
 
     logger.info(f"Exporting {len(chunks)} chunks...")
     output_dir.mkdir(parents=True, exist_ok=True)
-    # for idx, chunk in tqdm(list(enumerate(chunks)), total=len(chunks), desc="[chunker] Exporting"):
-    for idx, chunk in list(enumerate(chunks)):
+    for idx, chunk in enumerate(chunks):
         chunk_path = output_dir / f"{base_name}_{idx:02d}.wav"
         chunk.export(chunk_path, format="wav")
-        # print(f"[chunker] Exported: {chunk_path.name}")
 
     logger.info("Chunking complete.")
-    # print("[chunker] Done.")
 
 
 def cli_entry(args):
     config = load_config(args.config)
     input_file = Path(args.input)
     output_dir = Path(args.output)
-    # output_dir = Path(config.GENERAL.processed_output_dir) / "chunks"
+
+    # Determine silence threshold
+    if getattr(config.CHUNKING, "auto_threshold", False):
+        silence_thresh_db = estimate_silence_threshold(
+            str(input_file), offset_db=getattr(config.CHUNKING, "threshold_offset_db", -10.0)
+        )
+        logger.info(f"Auto-estimated silence threshold: {silence_thresh_db:.2f} dBFS")
+    else:
+        silence_thresh_db = config.CHUNKING.silence_noise_threshold_db
+        logger.info(f"Using static silence threshold: {silence_thresh_db} dBFS")
 
     chunk_audio(
         input_file=input_file,
         output_dir=output_dir,
         max_duration_sec=config.CHUNKING.max_chunk_duration_sec,
-        silence_thresh_db=config.CHUNKING.silence_noise_threshold_db,
+        silence_thresh_db=silence_thresh_db,
         min_silence_len_sec=config.CHUNKING.min_silence_duration_sec,
         keep_silence_ms=config.CHUNKING.keep_silence_ms,
     )

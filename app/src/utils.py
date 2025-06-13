@@ -4,6 +4,8 @@ import tomllib
 from pathlib import Path
 from types import SimpleNamespace
 
+from pydub import AudioSegment
+
 
 def load_config(config_path: str) -> SimpleNamespace:
     """
@@ -58,3 +60,19 @@ def setup_logger(module_name: str = "pipeline", log_path: str = "transcribeline.
     logger.addHandler(file_handler)
 
     return logger
+
+
+def estimate_silence_threshold(audio_path: str, offset_db: float = -10.0) -> float:
+    """
+    Estimate a dynamic silence threshold based on the average loudness of the audio file.
+
+    Parameters:
+        audio_path (str): Path to the audio file.
+        offset_db (float): How many dB quieter than the average should count as silence.
+
+    Returns:
+        float: Estimated silence threshold in dBFS.
+    """
+    audio = AudioSegment.from_file(audio_path)
+    average_loudness = audio.dBFS
+    return average_loudness + offset_db  # offset_db is negative

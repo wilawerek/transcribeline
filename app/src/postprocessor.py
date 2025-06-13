@@ -2,6 +2,7 @@ import glob
 import json
 import logging
 import re
+from datetime import timedelta
 from pathlib import Path
 
 from src.utils import setup_logger
@@ -22,9 +23,12 @@ def collect_aligned_files(inputs: list[str]) -> list[Path]:
 
 
 def extract_chunk_index(path: Path) -> int:
-    # Extract numeric index from filename like chunk_0001.aligned.json
     match = re.search(r".*_(\d+)\.aligned\.json", path.name)
     return int(match.group(1)) if match else 0
+
+
+def seconds_to_hhmmss(seconds: float) -> str:
+    return str(timedelta(seconds=int(seconds)))
 
 
 def merge_aligned_chunks(input_patterns: list[str], output_file: Path):
@@ -35,48 +39,49 @@ def merge_aligned_chunks(input_patterns: list[str], output_file: Path):
         logger.warning(f"No aligned files found for patterns: {input_patterns}.")
         return
 
-    # Sort files by extracted chunk index
     aligned_files.sort(key=extract_chunk_index)
 
     chunk_start_offset = 0.0
-    # print(aligned_files)
-    for file in aligned_files:
+
+    for idx, file in enumerate(aligned_files):
         try:
             with open(file, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
-            # Find max end time to offset next chunk
-            max_chunk_duration = max((seg["end"] for seg in data.get("segments", [])), default=0.0)
+            segments = data.get("segments", [])
+            max_chunk_duration = max((seg["end"] for seg in segments), default=0.0)
 
-            for seg in data.get("segments", []):
+            for seg in segments:
                 start = seg["start"] + chunk_start_offset
-                end = seg["end"] + chunk_start_offset
                 speaker = seg["speaker"]
                 text = seg["text"].strip()
                 speaker_blocks.append((start, speaker, text))
 
-            chunk_start_offset += max_chunk_duration
+            chunk_start_offset += max_chunk_duration - idx * 0.5
 
         except Exception as e:
             logger.error(f"Failed to load or parse {file.name}: {e}")
 
-    # Sort all segments by adjusted start time
     speaker_blocks.sort(key=lambda x: x[0])
 
     formatted_lines = []
     last_speaker = None
     buffer = []
+    block_start_time = None
 
     for start, speaker, text in speaker_blocks:
         if speaker != last_speaker:
             if buffer:
-                formatted_lines.append(f"[SPEAKER {last_speaker}] ({start:.2f})\n" + " ".join(buffer) + "\n")
+                formatted_lines.append(
+                    f"[{last_speaker}] ({seconds_to_hhmmss(block_start_time)})\n" + " ".join(buffer) + "\n"
+                )
                 buffer = []
             last_speaker = speaker
+            block_start_time = start
         buffer.append(text)
 
     if buffer:
-        formatted_lines.append(f"[SPEAKER {last_speaker}]\n" + " ".join(buffer) + "\n")
+        formatted_lines.append(f"[{last_speaker}] ({seconds_to_hhmmss(block_start_time)})\n" + " ".join(buffer) + "\n")
 
     output_file.parent.mkdir(parents=True, exist_ok=True)
     with open(output_file, "w", encoding="utf-8") as f:
@@ -93,7 +98,7 @@ def cli_entry(args):
     except ImportError:
         pass
 
-    input_patterns = args.input  # list of file or directory patterns
+    input_patterns = args.input
     output_file = Path(args.output)
 
     merge_aligned_chunks(input_patterns, output_file)

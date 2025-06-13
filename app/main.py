@@ -36,6 +36,14 @@ def run_generate_config(args):
     if destination.is_dir() or str(destination).endswith(("/", "\\")):
         destination = destination / SOURCE_CONFIG_TEMPLATE_PATH.name
 
+    if destination.exists():
+        if not args.overwrite:
+            logger.error(f"Config file already exists at '{destination}'.")
+            logger.info("Use --overwrite to replace it.")
+            sys.exit(1)  # Exit if file exists and overwrite not specified
+        else:
+            logger.warning(f"Overwriting existing config file at '{destination}'.")
+
     # Ensure the parent directory for the destination file exists
     destination.parent.mkdir(parents=True, exist_ok=True)
 
@@ -113,6 +121,11 @@ def main():
         nargs="?",  # Makes this argument optional (0 or 1 occurrence)
         default=".",  # Default value if no argument is provided (current directory)
         help="Destination path (directory or full file path) for the config file. Default: current directory.",
+    )
+    gen_config_parser.add_argument(  # NEW: Overwrite flag
+        "--overwrite",
+        action="store_true",  # This makes it a boolean flag (True if present, False otherwise)
+        help="Overwrite the destination file if it already exists.",
     )
     gen_config_parser.set_defaults(func=run_generate_config)
 
