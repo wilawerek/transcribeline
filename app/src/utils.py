@@ -55,10 +55,10 @@ def setup_logger(module_name: str = "pipeline", log_path: str = "transcribeline.
     # File handler
     # Path(log_dir).mkdir(parents=True, exist_ok=True)
     # file_handler = logging.FileHandler(Path(log_dir) / f"{module_name}.log")
-    file_handler = logging.FileHandler(log_path)
-    file_formatter = logging.Formatter(f"%(asctime)s [{module_name}] [%(levelname)s] %(message)s", "%Y-%m-%d %H:%M:%S")
-    file_handler.setFormatter(file_formatter)
-    logger.addHandler(file_handler)
+    # file_handler = logging.FileHandler(log_path)
+    # file_formatter = logging.Formatter(f"%(asctime)s [{module_name}] [%(levelname)s] %(message)s", "%Y-%m-%d %H:%M:%S")
+    # file_handler.setFormatter(file_formatter)
+    # logger.addHandler(file_handler)
 
     return logger
 
