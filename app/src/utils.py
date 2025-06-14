@@ -1,6 +1,7 @@
 import json
 import logging
 import tomllib
+from datetime import timedelta
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -42,7 +43,7 @@ def setup_logger(module_name: str = "pipeline", log_path: str = "transcribeline.
     Configure and return a logger that logs both to the console and a file.
     """
     logger = logging.getLogger(module_name)
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(logging.INFO)
     logger.handlers.clear()
 
     # Console handler
@@ -62,7 +63,7 @@ def setup_logger(module_name: str = "pipeline", log_path: str = "transcribeline.
     return logger
 
 
-def estimate_silence_threshold(audio_path: str, offset_db: float = -10.0) -> float:
+def estimate_silence_threshold(audio_path: str, offset_db: float = -20.0) -> float:
     """
     Estimate a dynamic silence threshold based on the average loudness of the audio file.
 
@@ -76,3 +77,7 @@ def estimate_silence_threshold(audio_path: str, offset_db: float = -10.0) -> flo
     audio = AudioSegment.from_file(audio_path)
     average_loudness = audio.dBFS
     return average_loudness + offset_db  # offset_db is negative
+
+
+def seconds_to_hhmmss(seconds: float) -> str:
+    return str(timedelta(seconds=int(seconds)))

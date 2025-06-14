@@ -2,10 +2,9 @@ import glob
 import json
 import logging
 import re
-from datetime import timedelta
 from pathlib import Path
 
-from src.utils import setup_logger
+from src.utils import seconds_to_hhmmss, setup_logger
 
 logger = setup_logger("postprocessing")
 
@@ -25,10 +24,6 @@ def collect_aligned_files(inputs: list[str]) -> list[Path]:
 def extract_chunk_index(path: Path) -> int:
     match = re.search(r".*_(\d+)\.aligned\.json", path.name)
     return int(match.group(1)) if match else 0
-
-
-def seconds_to_hhmmss(seconds: float) -> str:
-    return str(timedelta(seconds=int(seconds)))
 
 
 def merge_aligned_chunks(input_patterns: list[str], output_file: Path):

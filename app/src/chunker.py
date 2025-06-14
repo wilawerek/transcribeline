@@ -1,7 +1,12 @@
 from pathlib import Path
 
 from pydub import AudioSegment, silence
-from src.utils import estimate_silence_threshold, load_config, setup_logger
+from src.utils import (
+    estimate_silence_threshold,
+    load_config,
+    seconds_to_hhmmss,
+    setup_logger,
+)
 
 logger = setup_logger("chunker")
 
@@ -12,57 +17,62 @@ def chunk_audio(
     max_duration_sec: int,
     silence_thresh_db: float,
     min_silence_len_sec: float,
+    silence_cut_ratio: float = 0.5,  # NEW: 0.0=start, 1.0=end, 0.5=middle
 ):
-    # logger.info(f"Loading audio file: {input_file}")
     audio = AudioSegment.from_wav(input_file)
     base_name = input_file.stem
+    max_duration_ms = int(max_duration_sec * 1000)
+    min_silence_len_ms = int(min_silence_len_sec * 1000)
 
     logger.info("Detecting silent chunks...")
-    min_silence_len_ms = int(min_silence_len_sec * 1000)
     silent_ranges = silence.detect_silence(
         audio,
         min_silence_len=min_silence_len_ms,
         silence_thresh=silence_thresh_db,
-        seek_step=1,
+        seek_step=100,
     )
 
     if not silent_ranges:
-        logger.warning("No silent ranges found. Exporting original file as a single chunk.")
+        logger.warning("No silence found. Exporting original as single chunk.")
         output_dir.mkdir(parents=True, exist_ok=True)
         audio.export(output_dir / f"{base_name}_0.wav", format="wav")
         return
 
     chunks = []
-    last_start = 0
-    last_silence = None
+    last_chunk_start = 0
+    last_valid_silence = None  # tuple: (start, end)
 
-    for start, end in silent_ranges:
-        chunk_duration = start - last_start
+    for i, (start, end) in enumerate(silent_ranges):
+        duration_since_last = end - last_chunk_start
 
-        if chunk_duration > max_duration_sec * 1000:
-            # If we passed max duration, split at last known silence
-            if last_silence:
-                chunk_end = last_silence[0]
+        if duration_since_last > max_duration_ms:
+            if last_valid_silence is not None:
+                sil_start, sil_end = last_valid_silence
+                cut_point = int(sil_start + (sil_end - sil_start) * silence_cut_ratio)
+                # logger.debug(
+                #     f"Cutting chunk at silence: {sil_start}-{sil_end}ms → cut at {cut_point}ms "
+                #     f"[chunk: {(cut_point - last_chunk_start)/1000:.2f}s]"
+                # )
+                chunks.append(audio[last_chunk_start:cut_point])
+                last_chunk_start = cut_point
+                last_valid_silence = (start, end)
             else:
-                chunk_end = start  # fallback to current silence
-
-            chunk = audio[last_start:chunk_end]
-            chunks.append(chunk)
-            last_start = last_silence[1] if last_silence else end
-            last_silence = None  # reset
-
+                logger.error(f"No silence found within {max_duration_sec}s from {last_chunk_start}ms. Aborting.")
+                raise RuntimeError("No valid silence to cut at. Adjust chunking settings.")
         else:
-            last_silence = (start, end)
+            last_valid_silence = (start, end)
+            # logger.debug(f"Silence {i+1} accepted for chunk {len(chunks) + 1}")
 
-    # Final chunk
-    if last_start < len(audio):
-        chunks.append(audio[last_start:])
+    # Add final chunk
+    if last_chunk_start < len(audio):
+        # logger.info(f"Exporting final chunk from {last_chunk_start}ms to end")
+        chunks.append(audio[last_chunk_start:])
 
     logger.info(f"Exporting {len(chunks)} chunks...")
     output_dir.mkdir(parents=True, exist_ok=True)
     for idx, chunk in enumerate(chunks):
-        chunk_path = output_dir / f"{base_name}_{idx:02d}.wav"
-        chunk.export(chunk_path, format="wav")
+        chunk.export(output_dir / f"{base_name}_{idx:02d}.wav", format="wav")
+        # logger.debug(f"Exported chunk {idx} ({len(chunk) / 1000:.2f} sec)")
 
     logger.info("Chunking complete.")
 
@@ -74,7 +84,7 @@ def cli_entry(args):
 
     # Always auto-estimate threshold
     logger.info(f"Loading audio file: {input_file}")
-    silence_thresh_db = estimate_silence_threshold(str(input_file))
+    silence_thresh_db = estimate_silence_threshold(str(input_file), offset_db=-15.0)
     logger.info(f"Auto-estimated silence threshold: {silence_thresh_db:.2f} dBFS")
 
     chunk_audio(

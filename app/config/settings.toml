@@ -1,7 +1,6 @@
 [CHUNKING]
 max_chunk_duration_sec = 180
-min_silence_duration_sec = 1.5  # Adjusted to favor natural pauses
-
+min_silence_duration_sec = 1.5
 
 [WHISPER]
 model = "large"
