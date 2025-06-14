@@ -12,7 +12,6 @@ dist/                # Ignore dist directory at the root
 # Environment
 .venv/               # Your main Python 3.11 virtual environment
 .env                 # Your local environment variables file (CRUCIAL for security)
-.env.* # Any variations of .env files (e.g., .env.development)
 
 # Pytest
 .pytest_cache/       # Pytest cache directory
@@ -31,6 +30,7 @@ data/                # Your raw and processed data
 out/                 # Any other general output directory
 logs/                # Your log files
 app/logs/            # App log files
+**/*.log             # Any .log file
 
 # Mac/Linux OS specific files
 .DS_Store            # macOS directory service store
