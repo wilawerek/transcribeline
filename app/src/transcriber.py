@@ -9,17 +9,18 @@ from tqdm import tqdm
 logger = setup_logger("transcriber")
 
 
-def transcribe_audio(audio_path: Path, output_path: Path, model: str, language: str, logger: logging.Logger):
+def transcribe_audio(audio_path: Path, output_path: Path, model_name: str, language: str, logger: logging.Logger):
     # import warnings
     # warnings.filterwarnings("ignore", category=UserWarning)
 
     import whisper
 
-    model = whisper.load_model(model)
+    model = whisper.load_model(model_name)
 
     try:
         logger.info(f"Starting transcription: {audio_path.name}")
         result = model.transcribe(str(audio_path), language=language)
+        result["model_name"] = model_name
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(result, f, ensure_ascii=False, indent=2)
         logger.info(f"Transcribed: {audio_path.name}")
@@ -50,13 +51,13 @@ def cli_entry(args):
 
     logger.info(f"Found {len(audio_files)} chunks. Starting transcription...")
 
-    model = config.WHISPER.model
+    model_name = config.WHISPER.model
     language = config.WHISPER.language
 
     with ProcessPoolExecutor(max_workers=config.PARALLEL.parallel_workers) as executor:
         futures = {
             executor.submit(
-                transcribe_audio, audio_file, output_dir / f"{audio_file.stem}.json", model, language, logger
+                transcribe_audio, audio_file, output_dir / f"{audio_file.stem}.json", model_name, language, logger
             ): audio_file
             for audio_file in audio_files
         }
