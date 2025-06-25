@@ -6,9 +6,8 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
 from pyannote.core import Annotation, Segment
-from tqdm import tqdm
-
 from src.utils import load_config, setup_logger
+from tqdm import tqdm
 
 logger = setup_logger("aligner")
 
@@ -40,8 +39,10 @@ def align_segments(transcription: dict, diarization: Annotation) -> list:
         end = seg.get("end")
         text = seg.get("text")
         segment = Segment(start, end)
-        overlaps = diarization.crop(segment, mode="intersection")
+
+        overlaps = diarization.crop(segment, mode="loose")  # more permissive
         if not overlaps:
+            logger.warning(f"No speaker match for segment: [{start:.2f} - {end:.2f}]")
             speaker = "UNKNOWN"
         else:
             best = None
@@ -52,6 +53,7 @@ def align_segments(transcription: dict, diarization: Annotation) -> list:
                     best_overlap = overlap
                     best = spk_label
             speaker = best if best is not None else "UNKNOWN"
+
         aligned.append({"start": start, "end": end, "speaker": speaker, "text": text})
     return aligned
 
@@ -65,7 +67,7 @@ def align_pair(transcription_path: Path, diarization_path: Path, output_path: Pa
         combined = {
             "metadata": {
                 "audio_file": transcription_path.name,
-                "model": transcription.get("model"),
+                "model_name": transcription.get("model_name"),
                 "language": transcription.get("language"),
                 "duration": transcription.get("duration"),
             },
@@ -124,6 +126,5 @@ def cli_entry(args):
             for key in common_keys
         }
 
-        # for future in tqdm(as_completed(futures), total=len(futures), desc="Aligning"):
         for future in as_completed(futures):
             future.result()

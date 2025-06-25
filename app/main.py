@@ -173,6 +173,8 @@ def main():
         "--diarizations", required=True, nargs="+", help="Path(s) to diarization .rttm files or directories."
     )
     align_parser.add_argument("--output", required=True, help="Directory to save aligned .json files.")
+    # align_parser.add_argument("--config", required=True, help="Config.")
+
     # Removed specific --config here, as it's handled globally by the main parser.
     align_parser.set_defaults(func=run_aligning)
 
